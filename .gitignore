@@ -1,0 +1,16 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual Environment
+venv/
+
+# PyTorch model files and data
+*.pth
+data/
+
+# macOS system files
+.DS_Store
+
+# Testing
+.pytest_cache/ 
