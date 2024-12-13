@@ -5,9 +5,10 @@ from train import train
 
 def test_parameter_count():
     model = MNISTNet()
-    param_count = model.count_parameters()
-    assert param_count < 100000, f"Model has {param_count} parameters (should be <100000)"
-    print(f"Parameter test passed: {param_count} parameters")
+    print("\nModel Parameter Breakdown:")
+    param_count = model.print_model_summary()
+    assert param_count < 100000, f"Model has {param_count:,} parameters (should be <100000)"
+    print(f"\nParameter test passed: {param_count:,} parameters")
 
 def test_input_shape():
     model = MNISTNet()

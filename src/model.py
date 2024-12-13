@@ -27,3 +27,13 @@ class MNISTNet(nn.Module):
 
     def count_parameters(self):
         return sum(p.numel() for p in self.parameters())
+
+    def print_model_summary(self):
+        """Print layer-wise parameter count"""
+        total_params = 0
+        for name, parameter in self.named_parameters():
+            param_count = parameter.numel()
+            print(f'{name}: {param_count:,} parameters')
+            total_params += param_count
+        print(f'\nTotal Parameters: {total_params:,}')
+        return total_params

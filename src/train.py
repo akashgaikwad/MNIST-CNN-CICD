@@ -74,4 +74,6 @@ def train(save_model=True):
     return accuracy
 
 if __name__ == '__main__':
+    model = MNISTNet()
+    model.print_model_summary()
     train()
