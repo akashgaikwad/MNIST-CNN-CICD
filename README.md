@@ -7,29 +7,32 @@ This project implements a Convolutional Neural Network (CNN) for MNIST digit cla
 ## Project Overview
 
 The project consists of a CNN model designed to classify handwritten digits from the MNIST dataset. It features:
-- A custom CNN architecture with batch normalization
-- Automated testing and model artifact generation
-- Continuous Integration/Continuous Deployment pipeline
+- A lightweight CNN architecture optimized for MNIST
+- Data augmentation for improved training
+- Comprehensive automated testing
+- Continuous Integration pipeline with GitHub Actions
 
 ## Model Architecture
 
 The CNN architecture includes:
-- 3 convolutional layers with batch normalization
-- Max pooling layers
+- 2 convolutional layers (16 and 32 filters)
+- Max pooling layers after each convolution
 - ReLU activation functions
 - A fully connected output layer
 - Input shape: 28x28 grayscale images
 - Output: 10 classes (digits 0-9)
+- Total parameters: <25,000
 
 ## Project Structure
 
 ```
 ├── .github/
-│   └── workflows/
-│       └── ci_cd.yml
+│ └── workflows/
+│ └── ci_cd.yml
 ├── src/
-│   ├── model.py
-│   └── test_model.py
+│ ├── model.py # CNN model definition
+│ ├── train.py # Training script with data augmentation
+│ └── test_model.py # Comprehensive model tests
 ├── requirements.txt
 └── README.md
 ```
@@ -37,8 +40,9 @@ The CNN architecture includes:
 ## Requirements
 
 - Python 3.8+
-- PyTorch
-- pytest
+- PyTorch >= 2.1.0
+- torchvision >= 0.16.0
+- pytest == 7.4.0
 - Other dependencies listed in requirements.txt
 
 ## Installation
@@ -66,19 +70,34 @@ pip install -r requirements.txt
 
 python src/train.py
 
+The training script includes:
+- Data augmentation (rotation, affine transforms, perspective)
+- Adam optimizer
+- CrossEntropy loss
+- Automatic model saving with timestamp and accuracy
+
 ### Running Tests
 
 ```bash
 pytest src/test_model.py -v
 ```
 
+The test suite verifies:
+- Input/output shapes
+- Model accuracy (>95%)
+- Parameter count (<25,000)
+- Feature map shapes
+- Model deterministic behavior
+- Training functionality
+
 ## CI/CD Pipeline
 
-The project includes a GitHub Actions workflow that:
-1. Sets up Python environment
-2. Installs dependencies
-3. Runs tests
-4. Uploads model artifacts on successful test completion
+The GitHub Actions workflow:
+1. Triggers on push events
+2. Sets up Python 3.8 environment
+3. Installs project dependencies
+4. Runs the test suite
+5. Uploads trained model artifacts on successful tests
 
 
 ## Contact
