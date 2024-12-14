@@ -9,7 +9,9 @@ import os
 def get_transforms(train=True):
     if train:
         return transforms.Compose([
-            transforms.RandomRotation(15),
+            transforms.RandomRotation(5),
+            transforms.RandomAffine(degrees=0, translate=(0.02, 0.02)),
+            transforms.RandomPerspective(distortion_scale=0.05, p=0.1),
             transforms.ToTensor(),
             transforms.Normalize((0.1307,), (0.3081,))
         ])
@@ -24,8 +26,8 @@ def train(save_model=True):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     
     # Hyperparameters
-    batch_size = 64
-    learning_rate = 0.003
+    batch_size = 32
+    learning_rate = 0.001
     
     # MNIST Dataset with augmentation
     train_dataset = datasets.MNIST(
@@ -44,7 +46,7 @@ def train(save_model=True):
     # Model
     model = MNISTNet().to(device)
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(model.parameters(), lr=learning_rate,betas=(0.9, 0.999))
+    optimizer = optim.Adam(model.parameters(), lr=learning_rate)
     
     # Training statistics
     total_step = len(train_loader)
