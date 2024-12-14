@@ -1,5 +1,7 @@
 # MNIST CNN with CI/CD Pipeline
 
+[![Build Status](https://github.com/akashgaikwad/MNISTCNNCICD/actions/workflows/ci_cd.yml/badge.svg)](https://github.com/akashgaikwad/MNISTCNNCICD/actions)
+
 This project implements a Convolutional Neural Network (CNN) for MNIST digit classification using PyTorch, with an integrated CI/CD pipeline using GitHub Actions.
 
 ## Project Overview
